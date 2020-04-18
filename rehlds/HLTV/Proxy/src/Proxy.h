@@ -229,7 +229,8 @@ private:
 		CMD_ID_CLEARBANNS,
 		CMD_ID_MAXLOSS,
 		CMD_ID_PROTOCOL,
-		CMD_ID_REGION
+		CMD_ID_REGION,
+		CMD_ID_TOGGLEQUERY
 	};
 
 	void CMD_Rcon(char *cmdLine);
@@ -284,6 +285,7 @@ private:
 	void CMD_MaxLoss(char *cmdLine);
 	void CMD_Protocol(char *cmdLine);
 	void CMD_Region(char *cmdLine);
+	void CMD_ToggleQuery(char *cmdLine);
 
 	struct LocalCommandID_s {
 		char *name;
