@@ -313,6 +313,8 @@ protected:
 	Director m_DefaultDirector;
 	DirectorNull m_NullDirector;
 	INetSocket *m_Socket;
+	
+	bool m_QueryEnabled;
 
 	typedef struct challenge_s {
 		NetAddress adr;
