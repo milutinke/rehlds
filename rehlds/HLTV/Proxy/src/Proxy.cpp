@@ -80,6 +80,7 @@ Proxy::LocalCommandID_s Proxy::m_LocalCmdReg[] = {
 	{ "maxloss",           CMD_ID_MAXLOSS,            &Proxy::CMD_MaxLoss },
 	{ "protocol",          CMD_ID_PROTOCOL,           &Proxy::CMD_Protocol },
 	{ "region",            CMD_ID_REGION,             &Proxy::CMD_Region },
+	{ "togglequery",       CMD_ID_TOGGLEQUERY,        &Proxy::CMD_ToggleQuery },
 };
 
 #ifndef HOOK_HLTV
@@ -97,6 +98,7 @@ bool Proxy::Init(IBaseSystem *system, int serial, char *name)
 	m_MaxRate = 20000;
 	m_MaxUpdateRate = 20;
 	m_IsMaster = false;
+	m_QueryEnabled = true;
 
 	for (auto& cmd : m_LocalCmdReg) {
 		m_System->RegisterCommand(cmd.name, this, cmd.id);
@@ -282,7 +284,7 @@ void Proxy::RunFrame(double time)
 		UpdateStatusLine();
 	}
 
-	if (m_SystemTime > m_NextInfoMessagesUpdate) {
+	if (m_SystemTime > m_NextInfoMessagesUpdate && m_QueryEnabled) {
 		UpdateInfoMessages();
 	}
 
@@ -2346,6 +2348,13 @@ void Proxy::CMD_CheeringThreshold(char *cmdLine)
 
 	m_CheeringThreshold = float(Q_atof(params.GetToken(1)));
 }
+
+void Proxy::CMD_CheeringThreshold(char *cmdLine)
+{
+	m_QueryEnabled = !m_QueryEnabled;
+	m_System->Printf("Query: %s\n", m_QueryEnabled ? "Enabled" : "Disabled");
+}
+
 
 float Proxy::GetDelay()
 {
