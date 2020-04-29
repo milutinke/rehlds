@@ -2349,7 +2349,7 @@ void Proxy::CMD_CheeringThreshold(char *cmdLine)
 	m_CheeringThreshold = float(Q_atof(params.GetToken(1)));
 }
 
-void Proxy::CMD_CheeringThreshold(char *cmdLine)
+void Proxy::CMD_ToggleQuery(char *cmdLine)
 {
 	m_QueryEnabled = !m_QueryEnabled;
 	m_System->Printf("Query: %s\n", m_QueryEnabled ? "Enabled" : "Disabled");
